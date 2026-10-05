@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Studio - Instant QR Generator</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- QRCode.js Library CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-decor">
+        <div class="glow orb-1"></div>
+        <div class="glow orb-2"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+                    <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+                    <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+                    <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+                    <rect x="7" y="7" width="0.1" height="0.1"></rect>
+                    <rect x="18" y="7" width="0.1" height="0.1"></rect>
+                    <rect x="7" y="18" width="0.1" height="0.1"></rect>
+                </svg>
+                <span>QR Studio</span>
+            </div>
+            <h1 class="title">URL to QR Code</h1>
+            <p class="subtitle">링크나 텍스트를 입력하여 고품질 QR 코드를 즉시 생성하고 다운로드하세요.</p>
+        </header>
+
+        <!-- Main Card -->
+        <main class="main-card">
+            <!-- Left Input & Customization Panel -->
+            <section class="control-panel">
+                <div class="input-group">
+                    <label for="url-input" class="input-label">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                        URL 또는 텍스트 입력
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="url" id="url-input" placeholder="https://example.com" value="https://google.com" autocomplete="off">
+                        <button id="clear-btn" class="clear-btn" title="입력 지우기" type="button">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Customization Options -->
+                <div class="options-accordion">
+                    <h3 class="options-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                        디자인 커스텀
+                    </h3>
+                    <div class="options-grid">
+                        <div class="option-item">
+                            <label for="fg-color">전경색 (QR 색상)</label>
+                            <div class="color-picker-wrapper">
+                                <input type="color" id="fg-color" value="#6366f1">
+                                <span id="fg-color-hex" class="hex-code">#6366f1</span>
+                            </div>
+                        </div>
+                        <div class="option-item">
+                            <label for="bg-color">배경색</label>
+                            <div class="color-picker-wrapper">
+                                <input type="color" id="bg-color" value="#ffffff">
+                                <span id="bg-color-hex" class="hex-code">#ffffff</span>
+                            </div>
+                        </div>
+                        <div class="option-item">
+                            <label for="qr-size">크기 (픽셀)</label>
+                            <select id="qr-size">
+                                <option value="180">180 x 180 (작게)</option>
+                                <option value="250" selected>250 x 250 (기본)</option>
+                                <option value="350">350 x 350 (크게)</option>
+                                <option value="500">500 x 500 (고해상도)</option>
+                            </select>
+                        </div>
+                        <div class="option-item">
+                            <label for="qr-ecc">복구 수준 (Error Correction)</label>
+                            <select id="qr-ecc">
+                                <option value="L">낮음 (7%)</option>
+                                <option value="M" selected>중간 (15%)</option>
+                                <option value="Q">높음 (25%)</option>
+                                <option value="H">최고 (30%)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <button id="generate-btn" class="primary-btn" type="button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                    </svg>
+                    QR 코드 새로고침
+                </button>
+            </section>
+
+            <!-- Right Preview Panel -->
+            <section class="preview-panel">
+                <div class="qr-frame-outer">
+                    <div class="qr-frame-inner" id="qr-frame">
+                        <div id="qrcode"></div>
+                        <div id="qr-placeholder" class="placeholder hidden">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2" stroke-dasharray="4 4"></rect>
+                            </svg>
+                            <p>URL을 입력하면 QR 코드가 생성됩니다</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Download Buttons -->
+                <div class="download-actions">
+                    <button id="download-png-btn" class="download-btn png-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        PNG 다운로드
+                    </button>
+                    <button id="copy-btn" class="download-btn copy-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        클립보드 복사
+                    </button>
+                </div>
+
+                <div id="toast" class="toast hidden">클립보드에 QR 코드가 복사되었습니다!</div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>로컬 브라우저 전용 실행 가능 &bull; 서버 연결 불필요 &bull; QR Studio</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
